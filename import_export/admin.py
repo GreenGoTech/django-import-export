@@ -259,7 +259,7 @@ class ImportMixin(BaseImportMixin, ImportExportMixinBase):
         form_class = self.get_import_form_class(request)
         kwargs = self.get_import_form_kwargs(request)
 
-        if not isinstance(form_class, ImportExportFormBase):
+        if not issubclass(form_class, ImportExportFormBase):
             warnings.warn(
                 "The ImportForm class must inherit from ImportExportFormBase, "
                 "this is needed for multiple resource classes to work properly. ",
@@ -438,7 +438,7 @@ class ImportMixin(BaseImportMixin, ImportExportMixinBase):
             form_class = self.get_import_form_class(request)
             form_kwargs = self.get_form_kwargs(form_class, *args, **kwargs)
 
-            if isinstance(form_class, ImportExportFormBase):
+            if issubclass(form_class, ImportExportFormBase):
                 import_form = form_class(
                     import_formats,
                     self.get_import_resource_classes(),
